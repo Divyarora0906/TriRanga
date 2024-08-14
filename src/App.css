@@ -1,42 +1,88 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+* {
+  padding: 0px;
+  margin: 0px;
+}
+.Flex {
+  display: flex;
+  margin-top: 40px;
+  gap: 20px;
+  flex-wrap: wrap;
+  background: rgba(255, 255, 255, 0.11);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(3.7px);
+  -webkit-backdrop-filter: blur(3.7px);
+  border: 1px solid rgba(255, 255, 255, 0.56);
+  padding: 20px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+}
+h2 {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-size: 17px;
+}
+
+.Full_Container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.Full_Container > h1 {
+  color: rgb(0, 0, 0);
   text-align: center;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  margin: 20px 0px 20px 0px;
+  font-size: 40px;
+  gap: 20px;
+}
+input[type="file"] {
+  display: none;
+}
+/* Hide the default file input */
+input[type="file"] {
+  display: none;
+}
+.download-btn {
+  background-color: #0056b3;
+  padding: 15px;
+  outline: none;
+  border: none;
+  color: white;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  margin-top: 20px;
+  font-size: 18px;
+  border-radius: 10px;
+}
+.custom-file-upload {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  margin: 20px 20px;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+.custom-file-upload:hover {
+  background-color: #0056b3; 
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+.file-upload-container {
+  display: flex;
+  align-items: center;
 }
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+p {
+  font-size: 20px;
 }

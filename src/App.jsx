@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
+import bg from "./assets/jai-hind-sticker.gif";
+import "./App.css";
+import tri from "./assets/tri.png"
 
 function App() {
   const [image, setImage] = useState(null);
   const [removedBg, setRemovedBg] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [finalImage, setFinalImage] = useState(null);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -14,8 +18,6 @@ function App() {
         setImage(e.target.result);
       };
       reader.readAsDataURL(file);
-
-      
       removingBackground(file);
     }
   };
@@ -32,7 +34,7 @@ function App() {
       const response = await fetch('https://api.remove.bg/v1.0/removebg', {
         method: 'POST',
         headers: {
-          'X-Api-Key': 'w34zmHJVNLeNYqjJGEGQSkc9', 
+          'X-Api-Key': 'w34zmHJVNLeNYqjJGEGQSkc9',
         },
         body: formData,
       });
@@ -41,6 +43,7 @@ function App() {
         const result = await response.blob();
         const imageURL = URL.createObjectURL(result);
         setRemovedBg(imageURL);
+        combineWithBG(imageURL);
       } else {
         throw new Error(`${response.status}: ${response.statusText}`);
       }
@@ -52,38 +55,82 @@ function App() {
     }
   };
 
+  const combineWithBG = async (imageURL) => {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+
+    const gifBackground = new Image();
+    gifBackground.src = bg;
+
+    gifBackground.onload = () => {
+
+      const img = new Image();
+      img.src = imageURL;
+
+      img.onload = () => {
+        const imgWidth = img.width;
+        const imgHeight = img.height;
+        canvas.width = imgWidth;
+        canvas.height = imgHeight;
+        ctx.drawImage(gifBackground, 0, 0, imgWidth, imgHeight);
+        ctx.drawImage(img, 0, 0, imgWidth, imgHeight);
+        const finalImageURL = canvas.toDataURL('image/png');
+        setFinalImage(finalImageURL);
+      };
+    };
+  };
+
   return (
     <>
-      <h1>Happy Independence Day</h1>
-      <input
-        type="file"
-        name="image"
-        id="image"
-        accept="image/*"
-        onChange={handleFileChange}
-      />
-      {loading && <p>Loading...</p>}
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      {image && (
-        <div>
-          <h2>Original Image</h2>
-          <img
-            src={image}
-            alt="Original Preview"
-            style={{ marginTop: '20px', maxWidth: '300px' }}
+      <div className='Full_Container'>
+
+        <h1>Happy Independence Day </h1>
+        <img src={tri} alt="" style={{ height: "40px", width: "55px" }} />
+
+        <div class="file-upload-container">
+          <label for="image" class="custom-file-upload">
+            Choose File
+          </label>
+          <input
+            type="file"
+            name="image"
+            id="image"
+            accept="image/*"
+            onChange={handleFileChange}
           />
         </div>
-      )}
-      {removedBg && (
-        <div>
-          <h2>Image with Background Removed</h2>
-          <img
-            src={removedBg}
-            alt="Removed Background Preview"
-            style={{ marginTop: '20px', maxWidth: '300px' }}
-          />
+        <div className='Flex'>
+          {image && (
+            <div>
+              <h2>Original Image</h2>
+              <img
+                src={image}
+                alt="Original Preview"
+                style={{ marginTop: '20px', maxWidth: '300px', borderRadius: '20px' }}
+              />
+            </div>
+          )}
+          {finalImage && (
+            <div>
+              <h2>Add to Profile</h2>
+              {loading && <p>Loading...</p>}
+              <img
+                src={finalImage}
+                alt="Final Image with GIF Background"
+                style={{ marginTop: '20px', maxWidth: '300px', borderRadius: '20px' }}
+              />
+            </div>
+          )}
+
         </div>
-      )}
+        <a href={finalImage} download="DTiranga">
+          <button className="download-btn">Download </button>
+        </a>
+        {error && <p style={{ color: 'red' }}>{error}</p>}
+      </div>
+      <footer style={{ textAlign: 'center', fontSize: '18px' }}>
+        © {new Date().getFullYear()} Divy Arora. Developed and Concept by Divy Arora. All Rights Reserved.
+      </footer>
     </>
   );
 }
