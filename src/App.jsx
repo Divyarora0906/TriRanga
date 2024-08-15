@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import bg from "./assets/jai-hind-sticker.gif";
 import "./App.css";
 import tri from "./assets/tri.png"
+import logo from "./assets/TF.png"
 
 function App() {
   const [image, setImage] = useState(null);
@@ -83,12 +84,13 @@ function App() {
   return (
     <>
       <div className='Full_Container'>
-
+        <img src={logo} alt="" style={{borderRadius:"200px",height:"100px",width:"100px"}}/>
+        <h1 id='logo'>TriFusion</h1>
         <h1>Happy Independence Day </h1>
         <img src={tri} alt="" style={{ height: "40px", width: "55px" }} />
 
-        <div class="file-upload-container">
-          <label for="image" class="custom-file-upload">
+        <div className="file-upload-container">
+          <label htmlFor="image" className="custom-file-upload">
             Choose File
           </label>
           <input
@@ -129,7 +131,7 @@ function App() {
         {error && <p style={{ color: 'red' }}>{error}</p>}
       </div>
       <footer style={{ textAlign: 'center', fontSize: '18px' }}>
-        © {new Date().getFullYear()} Divy Arora. Developed and Concept by Divy Arora. All Rights Reserved.
+        © {new Date().getFullYear()} Developed and Concept by Divy Arora. All Rights Reserved.
       </footer>
     </>
   );
