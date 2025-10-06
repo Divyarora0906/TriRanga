@@ -37,7 +37,7 @@ _Add your screenshots here_
 
 ## ✨ Demo
 
-_Live Demo: [Your Deployment Link Goes Here]_
+_Live Demo: [TriFusion](https://trifusion-a6763.web.app/)
 
 ## 🤝 Contributing
 
